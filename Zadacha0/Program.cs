@@ -12,14 +12,33 @@ using System;
 using static System.Console;
 
 Clear();
+
+int tmp = MyLine("Введите количество элементов массива: ");
+
+WriteLine($"[{String.Join(", ", newArr(tmp))}]");
+
 int MyLine (string message) //Получение количества элементов в строковом массиве
 {
-System.Console.WriteLine(message);// Выводим приглашение ко ввооду
+System.Console.WriteLine(message);// Выводим приглашение ко вводу
 int result = int.Parse(ReadLine());// приводим к числу
 return result; //возвращаем результат
 }
 
-Write(MyLine("Введите количество строк массива: "));
 
-
+string[] newArr (int szarr) // Генерирует строковый массив с заданным количеством элементов
+{
+string[] myArray = new string[szarr];
+for(int j = 0; j < myArray.Length; j++)
+{
+int rnd = new Random().Next(1, 10);
+string m = string.Empty;
+for(int i = 0; i< rnd; i++)
+{ 
+    int strnd = new Random().Next(33, 127);
+    m += Convert.ToChar(strnd);
+}
+myArray[j] = m;
+}
+return myArray;
+}
 
