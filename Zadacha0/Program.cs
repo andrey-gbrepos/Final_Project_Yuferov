@@ -13,19 +13,34 @@ using static System.Console;
 
 Clear();
 
-int tmp = MyLine("Введите количество элементов массива: ");
+WriteLine("     Программа из имеющегося массива строк формирует новый массив,");
+WriteLine("          длина элементов которого не превышает трех символов.");
+WriteLine("(Исходный массив генерируется автоматически, с количеством элементов заданным пользователем.)");
 
-WriteLine($"[{String.Join(", ", newArr(tmp))}]");
+WriteLine();
+int tmp = MyLine("Введите количество элементов исходного массива: ");//Задание количества элементов исходного массива
+string[] rndArr = newArr(tmp); //Генерация исходного массива с заданным колличеством элементов
 
-int MyLine (string message) //Получение количества элементов в строковом массиве
+WriteLine();
+WriteLine($"Исходный массив из {rndArr.Length} элементов:");
+WriteLine($"[{String.Join(", ", rndArr)}]");
+
+WriteLine();
+WriteLine($"Получен массив из {resArr(rndArr).Length} элементов:");
+WriteLine($"[{String.Join(", ", resArr(rndArr))}]");
+
+WriteLine();
+
+
+int MyLine (string message) //МЕТОД - получение количества элементов в строковом массиве
 {
-System.Console.WriteLine(message);// Выводим приглашение ко вводу
+Write(message);// Выводим приглашение ко вводу
 int result = int.Parse(ReadLine());// приводим к числу
-return result; //возвращаем результат
+return result; //во8звращаем результат
 }
 
 
-string[] newArr (int szarr) // Генерирует строковый массив с заданным количеством элементов
+string[] newArr (int szarr) //МЕТОД - Генерирует строковый массив с заданным количеством элементов
 {
 string[] myArray = new string[szarr];
 for(int j = 0; j < myArray.Length; j++)
@@ -42,3 +57,26 @@ myArray[j] = m;
 return myArray;
 }
 
+string[] resArr (string[] inArr) //МЕТОД - Формирует новый массив с элементами от 3-х и менее символов
+{
+    int count = 0;
+    string strtmp = string.Empty;
+    for (int i = 0; i < inArr.Length; i++)
+    {
+        if (inArr[i].Length < 4) 
+        {            
+           count++; // считаем сколько нужных нам элементов в массиве
+        }
+    }
+       string[] tmpArr = new string[count]; //Создаем новый массив необходимого размера
+       count = 0;
+    for (int i = 0; i < inArr.Length; i++) //Заполняем массив
+    {
+        if (inArr[i].Length < 4) 
+        {
+            tmpArr[count] = inArr[i];
+            count++;
+        }
+    }
+    return tmpArr;
+}
